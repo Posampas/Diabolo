@@ -14,4 +14,7 @@ public class Hero {
     public int getHp() {
         return hp;
     }
+    public boolean isDead(){
+        return hp < 0;
+    }
 }
