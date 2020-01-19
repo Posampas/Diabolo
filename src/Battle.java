@@ -13,7 +13,7 @@ public class Battle {
     }
 
     public void Fight(Hero player) {
-        Enemy monster = new Enemy();
+        Enemy monster = new Enemy(player.getLvl());
 
         boolean stillFighting = true;
 
@@ -33,57 +33,48 @@ public class Battle {
                 case 1:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(1,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 2:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(2,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 3:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(3,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 4:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(4,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 5:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(5,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 6:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(6,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 7:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(7,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 8:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(8,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 case 9:
                     reactionTime = System.nanoTime();
                     reacted = isReactionGood(9,wereEnemyIsAttacking,attackStartTime,reactionTime);
-                    System.out.println(reacted);
                     break;
                 default:
                     System.out.println("Not a proper action");
             }
-            if (reacted) {
-                monster.inflictDamage(50);
-                System.out.println("Monster hp:" + monster.getHp());
+            monster.inflictDamage(counterAttack(reacted,player,monster));
+            System.out.println("Monster hp " + monster.getHp());
 
-            } else {
-                player.hp -= 50;
+
+             if(!reacted){
+                player.inflictDamage(50);
                 System.out.println("Player hp:" + player.getHp());
             }
 
@@ -112,7 +103,7 @@ public class Battle {
                 return 3;
             case 4:
                 System.out.println("He is attacking with RIGHT HAND");
-                return 3;
+                return 4;
             case 5:
                 System.out.println("He is targeting your CHEST");
                 return 5;
@@ -139,6 +130,47 @@ public class Battle {
             return (reactionTime - attackTime) <= 3000000000L;
         }
         return false;
+    }
+
+    private int counterAttack(boolean reacted, Hero player, Enemy monster){
+//            choose your counter attack, or action
+        System.out.println("Show him what you got: 1 - 9");
+        if (!reacted) return 0;
+
+        int attack=0;
+        if (attackRandomize(monster.getLvl(), player.getHp())>= ((player.getLvl()+monster.getLvl())/2)){
+            // attack is get through
+           attack = Main.inputNumeric();
+        }
+        return (int)playerAttackModifiers(player,monster,attack);
+
+
+    }
+    private int playerAttackModifiers( Hero player, Enemy monster, int action){
+        switch (action){
+            case 1:
+                return player.getStrength();
+            case 2:
+                return player.getStrength();
+            case 3:
+                return player.getStrength();
+            case 4:
+                return player.getStrength();
+            case 5:
+                return player.getStrength();
+            case 6:
+                return player.getStrength();
+            case 7:
+                return player.getStrength();
+            case 8:
+                return player.getStrength();
+            case 9:
+                return player.getStrength();
+            default:
+                return player.getStrength();
+
+
+        }
     }
 
 }

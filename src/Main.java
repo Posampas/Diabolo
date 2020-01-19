@@ -57,7 +57,18 @@ public class Main {
                     game.goFighting = false;
             }
             while(game.heroInfo){
-                System.out.println("heroInfo");
+                System.out.println( "heroInfo\n"+
+                                    "1. Add points\n" +
+                                    "2. Hero info");
+                switch (Main.inputNumeric()){
+                    case 1:
+                        player.upgrading();
+                        break;
+                    case 2:
+                        System.out.println(player);
+                        break;
+                }
+
                 game.heroInfo = false;
             }
             while (game.saving){
