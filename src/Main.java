@@ -53,7 +53,8 @@ public class Main {
 
                 Battle fight = new Battle();
                 fight.Fight(player);
-//                game.goFighting = false;
+                if(fight.isWon)
+                    game.goFighting = false;
             }
             while(game.heroInfo){
                 System.out.println("heroInfo");
